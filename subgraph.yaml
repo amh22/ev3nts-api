@@ -1,0 +1,32 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Ev3nts
+    network: mumbai
+    source:
+      address: "0xc2D518b0612D06f7FFB27A8Aa2e0358d0D990932"
+      abi: Ev3nts
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - ConfirmedAttendee
+        - DepositsPaidOut
+        - NewEventCreated
+        - NewRSVP
+      abis:
+        - name: Ev3nts
+          file: ./abis/Ev3nts.json
+      eventHandlers:
+        - event: ConfirmedAttendee(bytes32,address)
+          handler: handleConfirmedAttendee
+        - event: DepositsPaidOut(bytes32)
+          handler: handleDepositsPaidOut
+        - event: NewEventCreated(bytes32,address,uint256,uint256,uint256,string)
+          handler: handleNewEventCreated
+        - event: NewRSVP(bytes32,address)
+          handler: handleNewRSVP
+      file: ./src/ev-3-nts.ts
