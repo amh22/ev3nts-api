@@ -1,22 +1,25 @@
-specVersion: 0.0.1
+specVersion: 0.0.4
 schema:
   file: ./schema.graphql
+features:
+  - ipfsOnEthereumContracts
 dataSources:
   - kind: ethereum
     name: Ev3nts
     network: mumbai
     source:
-      address: "0xc2D518b0612D06f7FFB27A8Aa2e0358d0D990932"
+      address: '0xc2D518b0612D06f7FFB27A8Aa2e0358d0D990932'
       abi: Ev3nts
+      startBlock: 27714750
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
-        - ConfirmedAttendee
-        - DepositsPaidOut
-        - NewEventCreated
-        - NewRSVP
+        - Event
+        - Account
+        - RSVP
+        - Confirmation
       abis:
         - name: Ev3nts
           file: ./abis/Ev3nts.json
